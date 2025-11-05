@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Caro game simple</title>
+</head>
+<body>
+<h2>Caro game simple</h2>
+
+<div id="board"></div>
+
+<br>
+<button onclick="changeValue()">Change Value</button>
+
+<script>
+    let size = 5;
+    let board = [];
+    let currentPlayer = "X";
+
+    function createBoard() {
+        let s = "";
+        for (let i = 0; i < size; i++) {
+            board[i] = [];
+            for (let j = 0; j < size; j++) {
+                board[i][j] = ".";
+                s += "( . ) ";
+            }
+            s += "<br>";
+        }
+        document.getElementById("board").innerHTML = s;
+    }
+
+    function changeValue() {
+        let row = parseInt(prompt("Nhập hàng (1-5):")) - 1;
+        let col = parseInt(prompt("Nhập cột (1-5):")) - 1;
+
+        if (row < 0 || row >= size || col < 0 || col >= size) {
+            alert("Sai vị trí!");
+            return;
+        }
+
+        if (board[row][col] !== ".") {
+            alert("Ô này đã có giá trị!");
+            return;
+        }
+        board[row][col] = currentPlayer;
+        displayBoard();
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+    }
+
+    function displayBoard() {
+        let s = "";
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                s += "( " + board[i][j] + " ) ";
+            }
+            s += "<br>";
+        }
+        document.getElementById("board").innerHTML = s;
+    }
+
+    createBoard();
+</script>
+</body>
+</html>
